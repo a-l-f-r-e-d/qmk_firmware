@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-qmk compile -kb kyria/rev1 -km default
+qmk compile -kb splitkb/kyria/rev1 -km alf_dpx
