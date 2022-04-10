@@ -32,6 +32,8 @@
 // #define SPLIT_USB_DETECT
 // #define NO_USB_STARTUP_CHECK
 
-#define MASTER_RIGHT
+//define MASTER_RIGHT
+#define EE_HANDS
+
 
 #define TAPPING_TOGGLE 2

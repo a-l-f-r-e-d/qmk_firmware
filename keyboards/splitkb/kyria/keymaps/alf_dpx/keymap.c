@@ -207,13 +207,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     return true;
 }
 
-#ifdef OLED_DRIVER_ENABLE
+#ifdef OLED_ENABLE
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
 	return OLED_ROTATION_180;
 }
 
 static void render_dpx_logo(void){
-    static const char PROGMEM kyria_logo[] = {
+    static const char PROGMEM dpx_logo[] = {
         // 'dpx', 128x46px
         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -264,7 +264,7 @@ static void render_dpx_logo(void){
         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
     };
-    oled_write_raw_P(kyria_logo, sizeof(kyria_logo));
+    oled_write_raw_P(dpx_logo, sizeof(dpx_logo));
 }
 
 
@@ -308,12 +308,13 @@ static void render_status(void) {
     oled_write_P(IS_LED_ON(led_usb_state, USB_LED_SCROLL_LOCK) ? PSTR("SCRLCK ") : PSTR("       "), false);
 }
 
-void oled_task_user(void) {
+bool oled_task_user(void) {
     if (is_keyboard_master()) {
         render_status(); // Renders the current keyboard state (layer, lock, caps, scroll, etc)
     } else {
         render_dpx_logo();
     }
+    return false;
 }
 #endif
 
